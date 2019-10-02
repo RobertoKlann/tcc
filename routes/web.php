@@ -8,6 +8,23 @@
  * @since   23/08/2019
  */
 
+Route::get('/', function() {
+    return redirect('auth/login');
+});
+
+/*
+ | Auth
+ |
+ */
+Route::group([
+    'namespace' => 'Auth',
+    'prefix'    => 'auth'
+], function($router) {
+    Route::get('login' , 'LoginController@index')->name('auth.index');
+    Route::post('login', 'LoginController@login')->name('auth.login');
+    Route::get('logout', 'LoginController@logout')->name('auth.logout');
+});
+
 //Consultas
 Route::get('/ViewInicial'                             , 'ControllerPrincipal@getViewInicial');
 Route::get('/ViewInicial/ViewEstabelecimento'         , 'ControllerEstabelecimento@getSqlConsultaPadrao');
