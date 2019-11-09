@@ -30,15 +30,19 @@ Route::group([
     'prefix'     => 'bobWaiter',
     'middleware' => 'auth'
 ], function($router) {
+    // Route::get('teste', function(){
+    //     return bcrypt('123');
+    // });
+
     Route::get('{route}', 'HomeController@index')->where('route', 'index|home');
 
     //Consultas
     Route::get('/home'                     , 'ControllerPrincipal@index')->name('index');
     Route::get('/estabelecimento'          , 'ControllerEstabelecimento@show')->name('estabelecimento.index');
     Route::get('/estabelecimento/categoria', 'ControllerCategoriaEstabelecimento@show')->name('estabelecimento.categoria.index');
-    Route::get('/categoria'                , 'ControllerCategoria@show')->name('categoria.index');
-    Route::get('/produto'                  , 'ControllerProduto@show')->name('produto.index');
-    Route::get('/mesa'                     , 'ControllerMesa@show')->name('mesa.index');
+    Route::get('/categoria/{estcodigo}'    , 'ControllerCategoria@show')->name('categoria.index');
+    Route::get('/produto/{estcodigo}'      , 'ControllerProduto@show')->name('produto.index');
+    Route::get('/mesa/{estcodigo}'         , 'ControllerMesa@show')->name('mesa.index');
     Route::get('/usuario'                  , 'ControllerUsuario@show')->name('usuario.index');
 
     //ViewManutencao
@@ -92,7 +96,7 @@ Route::group([
 
     Route::get('getAllCategorias'       , 'ControllerSubCategoria@getAllCategorias');
     Route::get('getAllCategoriasEst'    , 'ControllerEstabelecimento@getAllCategoriasEst');
-    Route::get('getAllCategoriasProduto', 'ControllerProduto@getAllCategoriasProduto');
+    Route::get('getAllCategoriasProduto/{estcodigo}', 'ControllerProduto@getAllCategoriasProduto');
 
     Route::get('/estabelecimento/categoria/getCategoriaEstabelecimento/{ctecodigo}', 'ControllerCategoriaEstabelecimento@getCategoriaEstabelecimento');
     Route::get('/categoria/getCategoria/{ctecodigo}'                               , 'ControllerCategoria@getCategoria');
@@ -100,4 +104,8 @@ Route::group([
     Route::get('/estabelecimento/getEstabelecimento/{estcodigo}'                   , 'ControllerEstabelecimento@getEstabelecimento');
     Route::get('/produto/getProduto/{prdcodigo}'                                   , 'ControllerProduto@getProduto');
     Route::get('/usuario/getUsuario/{usucodigo}'                                   , 'ControllerUsuario@getUsuario');
+
+    Route::get('/getEstabelecimentoUsuario/{usucodigo}', 'ControllerUsuario@getEstabelecimentoUsuario');
+    Route::get('/getEstabelecimentos'                  , 'ControllerEstabelecimento@getEstabelecimentos');
+    
 });

@@ -28,13 +28,19 @@ class ControllerProduto extends Controller {
     /**
      * SQL padrão da Consulta de Produto.
      *
-     * @return Object
+     * @return Object[]
      */
-    public function show() {
+    public function show($codigo) {
+        if(!is_numeric($codigo)) {
+            return view('bobWaiter/ViewIncluirProduto');
+        }
+        
         $bProduto = DB::select('SELECT *
                                   FROM tbproduto
                                   JOIN tbcategoria
                                  USING (ctgcodigo)
+                                 WHERE TRUE
+                                   AND estcodigo = ' . $codigo . '
                               ORDER BY prdcodigo ASC
         ');
 
@@ -48,7 +54,7 @@ class ControllerProduto extends Controller {
                          '{$aCampos['preco']}', {$aCampos['ctgcodigo']}
         )");
 
-        return redirect()->route('produto.index');
+        return $this->show($aCampos['estabelecimento']);
     }
 
     public function destroy($iCodigo) {
@@ -71,7 +77,7 @@ class ControllerProduto extends Controller {
             ]
         );
 
-        return redirect()->route('produto.index');
+        return $this->show($aCampos['estabelecimento']);
     }
 
     public function getProduto($iCodigo) {
@@ -88,8 +94,11 @@ class ControllerProduto extends Controller {
         return response()->json($maxCodigo);
     }
 
-    public function getAllCategoriasProduto() {
-        $aCategorias = DB::select("SELECT * FROM tbcategoria");
+    public function getAllCategoriasProduto($codigo) {
+        $aCategorias = DB::select("SELECT * 
+                                     FROM tbcategoria
+                                    WHERE TRUE
+                                      AND estcodigo = " . $codigo);
 
         return response()->json($aCategorias);
     }

@@ -1,10 +1,8 @@
-$('button[name=incluir]').click(function() {
-    $.get('bobWaiter/getProximoCodigoMesa', function(dados){
-        $('input[name=codigo]').val(dados[0].maxcodigo + 1);
-    });
-});
-
-$(document).ready(function(){
+$(document).ready(function() {
+    if($('#cancelar')[0]) {
+        $('#cancelar')[0].href = $('#cancelar')[0].href +'/'+ getCodigoEstabelecimento();
+    }
+    $('#estabelecimento').val(getCodigoEstabelecimento());
     if($('#form-incluir-mesa')[0]) {
         $.get('/bobWaiter/getProximoCodigoMesa', function(dados){
             $('input[name=codigo]').val(dados[0].maxcodigo + 1);
@@ -12,11 +10,8 @@ $(document).ready(function(){
     }
     
     if($('#form-alterar-mesa')[0] && $('input[name=codigo]')) {        
-        debugger;
-        let situacao = $('input[name=situacao-alterar]').val();
-
-        $('select[name=situacao]')[0].options[situacao].selected = false;
-        
+        let situacao = $('input[name=situacao-alterar]').val();        
+        $('select[name=situacao]')[0].options[situacao].selected = false;        
     }
     
     $('a[name=excluirMesa]').click(function() {
@@ -36,7 +31,7 @@ $(document).ready(function(){
                 } else {
                     swal("Mesa excluida com sucesso!", "", "success");
                     setTimeout(function() {
-                        window.location.href = 'http://127.0.0.1:8000/bobWaiter/mesa';
+                        window.location.href = 'http://127.0.0.1:8000/bobWaiter/mesa/' + getCodigoEstabelecimento();
                     },2000);
                 }
             }

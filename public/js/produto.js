@@ -1,6 +1,6 @@
 $('button[name=incluir]').click(function() {   
 
-    $.get('bobWaiter/getAllCategoriasProduto', function(dados){
+    $.get('/bobWaiter/getAllCategoriasProduto/' + getCodigoEstabelecimento(), function(dados){
         $('select[name=catcodigo]').html('<option value="">Selecione</option>');
         for(i = 0; i < dados.length; i++) {            
             $('select[name=catcodigo]').append($('<option>', {
@@ -9,30 +9,19 @@ $('button[name=incluir]').click(function() {
             }));
         }        
     });
-
-    $('select[name=catcodigo]').change(function() {
-        var iCodigoCategoria = $('select[name=catcodigo]').val();
-        $.get('bobWaiter/getAllSubCategoriasProduto/' + iCodigoCategoria, function(dados){
-            $('select[name=subcatcodigo]').html('<option value="">Selecione</option>');            
-            $('select[name=subcatcodigo]').removeAttr("disabled");
-
-            for(i = 0; i < dados.length; i++) {            
-                $('select[name=subcatcodigo]').append($('<option>', {
-                    value: dados[i].sbccodigo,
-                    text: dados[i].sbcdescricao
-                }));
-            }        
-        });
-    });  
 });
 
 $(document).ready(function(){
+    if($('#cancelar')[0]) {
+        $('#cancelar')[0].href = $('#cancelar')[0].href +'/'+ getCodigoEstabelecimento();
+    }
+    $('#estabelecimento').val(getCodigoEstabelecimento());
     if($('#form-incluir-produto')[0]) {
         $.get('/bobWaiter/getProximoCodigoProduto', function(dados){
             $('input[name=codigo]').val(dados[0].maxcodigo + 1);
         });
         
-        $.get('/bobWaiter/getAllCategoriasProduto', function(dados){
+        $.get('/bobWaiter/getAllCategoriasProduto/' + getCodigoEstabelecimento(), function(dados){
             $('select[name=catcodigo]').html('<option value="">Selecione</option>');
             for(i = 0; i < dados.length; i++) {            
                 $('select[name=ctgcodigo]').append($('<option>', {
@@ -44,7 +33,7 @@ $(document).ready(function(){
     }
     
     if($('#form-alterar-produto')[0] && $('input[name=codigo]')) {
-        $.get('/bobWaiter/getAllCategoriasProduto', function(dados){
+        $.get('/bobWaiter/getAllCategoriasProduto/' + getCodigoEstabelecimento(), function(dados){
             let bSelected = false,
                 categoria = $('input[id=categoria-produto]').val();
             
@@ -66,6 +55,7 @@ $(document).ready(function(){
     }
     
     $('a[name=excluirProduto]').click(function() {
+        debugger;
         let iCodigo       = $(this)[0].attributes.value.value,
             laravel_token = $("#token").val();
             
@@ -82,7 +72,7 @@ $(document).ready(function(){
                 } else {
                     swal("Produto excluido com sucesso!", "", "success");
                     setTimeout(function() {
-                        window.location.href = 'http://127.0.0.1:8000/bobWaiter/produto';
+                        window.location.href = 'http://127.0.0.1:8000/bobWaiter/produto/' + getCodigoEstabelecimento();
                     }, 2000);
                 }
             }

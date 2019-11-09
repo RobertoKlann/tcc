@@ -57,37 +57,26 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('bobWaiter/categoria') }}">
-                        <i class="fas fa-bars"></i>
-                        <span>Categoria</span></a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('bobWaiter/produto') }}">
-                        <i class="fas fa-hotdog"></i>
-                        <span>Produto</span></a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link" href="{{ url('bobWaiter/usuario') }}">
                         <i class="fa fa-users fa-lg"></i>
                         <span>Usuário</span></a>
                 </li>
                 @else
+                
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('bobWaiter/categoria') }}">
+                    <a class="nav-link" id="hrefcategoria" href="{{ url('bobWaiter/categoria/')}}" >
                         <i class="fas fa-bars"></i>
                         <span>Categoria</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('bobWaiter/produto') }}">
+                    <a class="nav-link" id="hrefproduto" href="{{ url('bobWaiter/produto/') }}">
                         <i class="fas fa-hotdog"></i>
                         <span>Produto</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('bobWaiter/mesa') }}">
+                    <a class="nav-link" id="hrefmesa" href="{{ url('bobWaiter/mesa/') }}">
                         <i class="fas fa-table"></i>
                         <span>Mesa</span></a>
                 </li>
@@ -120,7 +109,8 @@
                         <li class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" id="dropdown-profile" data-toggle="dropdown">
                                 @if (Auth::check())
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->usunome }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="spanusuario" >{{ Auth::user()->usucodigo }} - {{ Auth::user()->usunome }}</span>
+                                <input type="hidden" id="codigoestabelecimento" value="{{ Auth::user()->estcodigo }}">
                                 @else
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuário</span>
                                 @endif
@@ -139,6 +129,7 @@
                         @yield('page-content')
                     </div>
                 </div>
+                
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
@@ -163,17 +154,13 @@
         <script src="/js/axios.js"></script>
         <script src="/js/sweetAlert.js"></script>
         <script src="/js/jquery.mask.min.js"></script>
-        <script type="text/javascript">
-
-            $(window).on('load', () => {
-                $('#logout').on('click', onClickLogout);
-            });
-
+        <script src="/js/index.js"></script>
+        <script>
             function onClickLogout() {
                 window.location.href = "{{ url('auth/logout') }}";
             }
-
         </script>
+        
         @yield('scripts')
     </body>
 

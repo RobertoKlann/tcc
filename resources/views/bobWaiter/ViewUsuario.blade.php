@@ -48,7 +48,7 @@
             <td><?= $oUsuario->usucidade ?></td>
             <td><?= $oUsuario->usuestado ?></td>
             <td><?= $oUsuario->usutelefone ?></td>
-            <td><?= $oUsuario->usustatus ?></td>
+            <td><?= ($oUsuario->usuativo == 1) ? 'Ativo' : 'Inativo' ?></td>
             <td>
                 <a id="anchorAlterar" class="anchor-icons" href="{{ url('bobWaiter/usuario/edit/' . $oUsuario->usucodigo) }}">
                     <i class="fas fa-edit"></i>

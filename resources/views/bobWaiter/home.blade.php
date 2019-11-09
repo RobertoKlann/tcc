@@ -6,36 +6,54 @@
 
 @endsection
 @section('page-content')
-
-<div class="card border-primary mb-3 card-pedido" style="max-width: 18rem; max-height: 17rem;">
-    <div class="card-header">Pedido - 01</div>
-        <div class="card-body text-primary">
-            <h5 class="card-title">Mesa - 01</h5>
-            <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+@if (Auth::user()->usutipo != 1)
+<div class="row" style="justify-content: center;">
+    <div class="card card-pedido card-detalhe-pedido container-pedido-produzido">
+        <div class="card-body card-body-pedido">
+            <h6 class="card-title font-weight-bold">Pedido 01</h6>
+            <p class="p-card-detalhe-mesa">Status: Finalizado</p>
+            <p class="p-card-detalhe-mesa">Pago: Não</p>
+            <p class="p-card-detalhe-mesa">Usuário: William Tiago</p>
         </div>
     </div>
-    <div class="card border-secondary mb-3 card-pedido" style="max-width: 18rem; max-height: 17rem;">
-    <div class="card-header">Pedido - 02</div>
-    <div class="card-body text-secondary">
-        <h5 class="card-title">Mesa - 02</h5>
-        <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+
+    <div class="card card-pedido card-detalhe-pedido container-pedido-disponivel">
+        <div class="card-body card-body-pedido">
+            <h6 class="card-title font-weight-bold">Pedido 02</h6>
+            <p class="p-card-detalhe-mesa">Status: Entregue</p>
+            <p class="p-card-detalhe-mesa">Pago: Sim</p>
+            <p class="p-card-detalhe-mesa">Usuário: Roberto Klann</p>
+        </div>
     </div>
+
+    <div class="card card-pedido card-detalhe-pedido container-pedido-producao">
+        <div class="card-body card-body-pedido">
+            <h6 class="card-title font-weight-bold">Pedido 03</h6>
+            <p class="p-card-detalhe-mesa">Status: Em produção</p>
+            <p class="p-card-detalhe-mesa">Pago: Não</p>
+            <p class="p-card-detalhe-mesa">Usuário: Deivid Jeferson</p>
+        </div>
     </div>
-    <div class="card border-success mb-3 card-pedido" style="max-width: 18rem; max-height: 17rem;">
-    <div class="card-header">Pedido - 03</div>
-    <div class="card-body text-success">
-        <h5 class="card-title">Mesa - 03</h5>
-        <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+
+    <div class="card card-pedido card-detalhe-pedido container-pedido-disponivel">
+        <div class="card-body card-body-pedido">
+            <h6 class="card-title font-weight-bold">Pedido 04</h6>
+            <p class="p-card-detalhe-mesa">Status: Entregue</p>
+            <p class="p-card-detalhe-mesa">Pago: Sim</p>
+            <p class="p-card-detalhe-mesa">Usuário: Lucas Gustavo</p>
+        </div>
     </div>
-    </div>
-    <div class="card border-danger mb-3 card-pedido" style="max-width: 18rem; max-height: 17rem;">
-    <div class="card-header">Pedido - 04</div>
-    <div class="card-body text-danger">
-        <h5 class="card-title">Mesa - 04</h5>
-        <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+
+    <div class="card card-pedido card-detalhe-pedido container-pedido-produzido">
+        <div class="card-body card-body-pedido">
+            <h6 class="card-title font-weight-bold">Pedido 05</h6>
+            <p class="p-card-detalhe-mesa">Status: Finalizado</p>
+            <p class="p-card-detalhe-mesa">Pago: Não</p>
+            <p class="p-card-detalhe-mesa">Usuário: Ivan Bonetti</p>
+        </div>
     </div>
 </div>
-<button type="button" class="btn btn-primary btn-lg btn-loader"><a class="anchor-refresh" href="/ViewInicial">Recarregar</a></button>
+@endif
 
 @endsection
 

@@ -23,7 +23,7 @@
                     <div class="login-form">
                         <form action="login" method="post" id="form-login">
                             <div class="form-group has-feedback input-login">
-                                <input type="text" name="email" class="form-control" placeholder="Informe seu login">
+                                <input type="text" name="email" class="form-control" placeholder="Informe seu email">
                             </div>
                             <div class="form-group has-feedback input-login">
                                 <input type="password" name="password" class="form-control" placeholder="Informe sua senha">

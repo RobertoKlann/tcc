@@ -30,9 +30,15 @@ class ControllerMesa extends Controller {
      *
      * @return Object
      */
-    public function show() {
+    public function show($codigo) {
+        if(!is_numeric($codigo)) {
+            return view('bobWaiter/ViewIncluirMesa');
+        }
+        
         $bMesa = DB::select('SELECT *
                                FROM tbmesa
+                              WHERE TRUE
+                                AND estcodigo = ' . $codigo . '
                            ORDER BY msacodigo ASC
         ');
 
@@ -41,10 +47,11 @@ class ControllerMesa extends Controller {
 
     public function store() {
         $aCampos = Request::all();
-        DB::insert("INSERT INTO tbmesa(msacodigo, msaqtdlugares, msasituacao)
-                         VALUES({$aCampos['codigo']}, '{$aCampos['qtdlugares']}', {$aCampos['situacao']})");
+        DB::insert("INSERT INTO tbmesa(msacodigo, msaqtdlugares, msasituacao, estcodigo)
+                         VALUES({$aCampos['codigo']}, '{$aCampos['qtdlugares']}',
+                         {$aCampos['situacao']}, {$aCampos['estcodigo']})");
 
-        return redirect()->route('mesa.index');
+        return $this->show($aCampos['estabelecimento']);
     }
 
     public function destroy($iCodigo) {
@@ -61,7 +68,7 @@ class ControllerMesa extends Controller {
         $aCampos = Request::all();
         DB::table('tbmesa')->where('msacodigo', '=', "{$aCampos['codigo']}")->update(['msaqtdlugares' => "{$aCampos['qtdlugares']}", 'msasituacao' => "{$aCampos['situacao']}"]);
 
-        return redirect()->route('mesa.index');
+        return $this->show($aCampos['estabelecimento']);
     }
 
     public function getMesa($iCodigo) {

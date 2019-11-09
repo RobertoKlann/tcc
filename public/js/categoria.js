@@ -1,6 +1,12 @@
-$(document).ready(function(){
+$(document).ready(function() {
+
+    if($('#cancelar')[0]) {
+        $('#cancelar')[0].href = $('#cancelar')[0].href +'/'+ getCodigoEstabelecimento();
+    }
+    $('#estabelecimento').val(getCodigoEstabelecimento());
+    
     if($('#form-incluir-categoria')[0]) {
-        $.get('/bobWaiter/getProximoCodigoCategoria', function(dados){
+        $.get('/bobWaiter/getProximoCodigoCategoria', function(dados) {
             $('input[name=codigo]').val(dados[0].maxcodigo + 1);
         });
     }
@@ -17,13 +23,12 @@ $(document).ready(function(){
                 'X-CSRF-Token': laravel_token
             },
             success: function (data) {
-                debugger;
                 if(data.success !== 'true') {
                     swal("Não foi possível excluir a categoria!", "", "warning");
                 } else {
                     swal("Categoria excluida com sucesso!", "", "success");
                     setTimeout(function() {
-                        window.location.href = 'http://127.0.0.1:8000/bobWaiter/categoria';
+                        window.location.href = 'http://127.0.0.1:8000/bobWaiter/categoria/' + getCodigoEstabelecimento();
                     },2000);
                 }
             }

@@ -74,11 +74,10 @@ class ControllerUsuario extends Controller {
                 'usutelefone'       => "{$aCampos['telefone']}",
                 'usucidade'         => "{$aCampos['cidade']}",
                 'usuestado'         => "{$aCampos['estado']}",
-                'usustatus'         => "{$aCampos['status']}",
+                'usuativo'          => "{$aCampos['status']}",
                 'usutipo'           => "{$aCampos['tipo']}",
                 'password'          => "{$aCampos['password']}",
-                'email'             => "{$aCampos['email']}",
-                'usudatanascimento' => "{$aCampos['datanascimento']}"
+                'email'             => "{$aCampos['email']}"
             ]
         );
 
@@ -95,6 +94,12 @@ class ControllerUsuario extends Controller {
         $maxCodigo = DB::select('SELECT MAX(usucodigo) maxcodigo FROM tbusuario');
 
         return response()->json($maxCodigo);
+    }
+
+    public function getEstabelecimentoUsuario($usuario) {
+        $codigo = DB::select('SELECT estcodigo FROM tbusuario WHERE TRUE AND usucodigo = '. $usuario);
+
+        return response()->json($codigo);
     }
 
 }

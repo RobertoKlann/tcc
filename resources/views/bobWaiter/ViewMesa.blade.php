@@ -36,7 +36,7 @@
         <tr>
             <td><?= $oMesa->msacodigo ?></td>
             <td><?= $oMesa->msaqtdlugares ?></td>
-            <td><?= $oMesa->msasituacao ?></td>
+            <td><?= ($oMesa->msasituacao == 1) ? 'Disponível' : 'Ocupada'?></td>
             <td>
                 <a id="anchorAlterar" class="anchor-icons" href="{{ url('bobWaiter/mesa/edit/' . $oMesa->msacodigo) }}">
                     <i class="fas fa-edit"></i>

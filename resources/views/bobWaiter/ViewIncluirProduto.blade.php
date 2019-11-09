@@ -28,9 +28,9 @@
                     </div>
 
                     <div class="row">
-                        <label for="preco" class="col-sm-3 col-form-label-sm label-right">Preco:</label>
+                        <label for="preco" class="col-sm-3 col-form-label-sm label-right">Preço:</label>
                         <div class="col-sm-3">
-                            <input type="text" name="preco" class="form-control input-small" id="descricao">
+                            <input type="number" name="preco" class="form-control input-small" id="preco">
                         </div>
                     </div>
 
@@ -43,6 +43,8 @@
                         </div>
                     </div>
 
+                    <input type="hidden" name="estabelecimento" class="form-control input-small" id="estabelecimento">
+
                     <div class="form-group row justify-content-center mt-3">
                         <button type="submit" id="alterar" class="btn btn-primary btn-icon-split btn-sm">
                             <span class="icon text-white-50">
@@ -50,7 +52,7 @@
                             </span>
                             <span class="text">Confirmar</span>
                         </button>
-                        <a href="{{ url('bobWaiter/produto') }}" class="btn btn-primary btn-icon-split btn-sm">
+                        <a href="{{ url('bobWaiter/produto') }}" id="cancelar" class="btn btn-primary btn-icon-split btn-sm">
                             <span class="icon text-white-50">
                                 <i class="fas fa-times"></i>
                             </span>

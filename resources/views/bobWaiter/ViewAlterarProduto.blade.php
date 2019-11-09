@@ -45,6 +45,8 @@
                         </div>
                     </div>
 
+                    <input type="hidden" name="estabelecimento" class="form-control input-small" id="estabelecimento">
+
                     <div class="form-group row justify-content-center mt-3">
                         <button type="submit" id="alterar" class="btn btn-primary btn-icon-split btn-sm">
                             <span class="icon text-white-50">
@@ -52,7 +54,7 @@
                             </span>
                             <span class="text">Confirmar</span>
                         </button>
-                        <a href="{{ url('bobWaiter/produto') }}" class="btn btn-primary btn-icon-split btn-sm">
+                        <a href="{{ url('bobWaiter/produto') }}" id="cancelar" class="btn btn-primary btn-icon-split btn-sm">
                             <span class="icon text-white-50">
                                 <i class="fas fa-times"></i>
                             </span>

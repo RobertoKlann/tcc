@@ -110,6 +110,15 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <label for="tipo" class="col-sm-3 col-form-label-sm label-right">Estabelecimento:</label>
+                        <div class="col-sm-2">
+                            <select name="estcodigo" id="estcodigo">
+                                
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="form-group row justify-content-center mt-3">
                         <button type="submit" id="alterar" class="btn btn-primary btn-icon-split btn-sm">
                             <span class="icon text-white-50">

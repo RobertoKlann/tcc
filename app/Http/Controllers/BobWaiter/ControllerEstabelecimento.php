@@ -99,4 +99,10 @@ class ControllerEstabelecimento extends Controller {
         return response()->json($aCategorias);
     }
 
+    public function getEstabelecimentos() {
+        $aEst = DB::select('SELECT * FROM tbestabelecimento');
+
+        return response()->json($aEst);
+    }
+
 }

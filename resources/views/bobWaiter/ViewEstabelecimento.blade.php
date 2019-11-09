@@ -26,7 +26,7 @@
 <table class="table table-striped">
     <thead class="thead-blue">
         <tr>
-        <th scope="col">Código Estabelecimento</th>
+        <th scope="col">Código</th>
         <th scope="col">Nome/Razão</th>
         <th scope="col">Endereço</th>
         <th scope="col">Horário</th>

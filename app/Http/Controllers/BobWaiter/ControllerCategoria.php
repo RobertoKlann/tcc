@@ -31,9 +31,15 @@ class ControllerCategoria extends Controller {
      *
      * @return Object
      */
-    public function show() {
+    public function show($codigo) {
+        if($codigo == 'create') {
+            return view('bobWaiter/ViewIncluirCategoria');
+        }
+
         $bCat = DB::select('SELECT *
                               FROM tbcategoria
+                             WHERE TRUE
+                               AND estcodigo = ' . $codigo . '
                           ORDER BY ctgcodigo ASC
         ');
 
@@ -43,19 +49,21 @@ class ControllerCategoria extends Controller {
     public function store() {
         $aCampos = Request::all();
         try {
-            DB::insert("INSERT INTO tbcategoria(ctgcodigo, ctgdescricao)
-                         VALUES({$aCampos['codigo']}, '{$aCampos['descricao']}')");
+            DB::insert("INSERT INTO tbcategoria(ctgcodigo, ctgdescricao, estcodigo)
+                         VALUES({$aCampos['codigo']}, '{$aCampos['descricao']}', {$aCampos['estabelecimento']} )");
         } catch(RuntimeException $e) {
-            return redirect()->route('categoria.index');
+            return $this->show($aCampos['estabelecimento']);
         }
 
-        return redirect()->route('categoria.index');
+        return $this->show($aCampos['estabelecimento']);
     }
 
     public function destroy($iCodigo) {
         try {
             DB::table('tbcategoria')->where('ctgcodigo', '=', $iCodigo)->delete();
         } catch(RuntimeException $e) {
+            return response()->json(['success' => $e->getMessage()]);
+        } catch(Exception $e) {
             return response()->json(['success' => $e->getMessage()]);
         }
 
@@ -66,7 +74,7 @@ class ControllerCategoria extends Controller {
         $aCampos = Request::all();
         DB::table('tbcategoria')->where('ctgcodigo', '=', "{$aCampos['codigo']}")->update(['ctgdescricao' => "{$aCampos['descricao']}"]);
 
-        return redirect()->route('categoria.index');
+        return $this->show($aCampos['estabelecimento']);
     }
 
     public function getCategoria($iCodigo) {

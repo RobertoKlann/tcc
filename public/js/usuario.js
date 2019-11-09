@@ -5,6 +5,16 @@ $(document).ready(function(){
             $('input[name=codigo]').val(dados[0].maxcodigo + 1);
         });
     }
+
+    $.get('/bobWaiter/getEstabelecimentos', function(dados){
+        for(i = 0; i < dados.length; i++) {            
+            $('select[name=estcodigo]').append($('<option>', {
+                value: dados[i].estcodigo,
+                text: dados[i].estnomerazao
+            }));
+        }
+    });
+
     
     $('a[name=excluirUsuario]').click(function() {
         let iCodigo       = $(this)[0].attributes.value.value,
